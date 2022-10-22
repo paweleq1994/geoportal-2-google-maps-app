@@ -58,17 +58,21 @@ export default function App() {
     const search = () => {
         axios.get(`https://uldk.gugik.gov.pl/?request=GetParcelByIdOrNr&id=${text}&result=teryt%2Cparcel%2Cgeom_wkt&srid=2180`)
             .then(async r => {
+                if(r.data.startsWith("-1")) {
+                    setResponseGeo([r.data.replace('-1', '')])
+
+                    return
+                }
+
                 const coordinates = humanReadableCoordinates(r);
+                const googleUrl = "https://www.google.pl/maps/place/";
                 let tmp = [];
 
-                setResponseGeo([]);
-                responseGeo = [];
-
-                coordinates.forEach(e => tmp.push(`https://www.google.pl/maps/place/${e}`));
+                coordinates.forEach(e => tmp.push(googleUrl + e));
                 setResponseGeo(tmp)
 
                 if (coordinates.length === 1) {
-                    await Linking.openURL(`https://www.google.pl/maps/place/${coordinates}`)
+                    await Linking.openURL(googleUrl + coordinates)
                 }
             })
             .catch(e => {
@@ -77,7 +81,13 @@ export default function App() {
     }
 
     function renderUrls() {
-        console.log(responseGeo);
+        if (responseGeo.length > 0 && !responseGeo[0].startsWith('https://')) {
+            return (
+                <Text style={{marginTop: 15}}>
+                    {responseGeo}
+                </Text>
+            )
+        }
 
         return responseGeo.map(e => {
             return (
