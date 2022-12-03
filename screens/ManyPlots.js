@@ -12,6 +12,7 @@ import {
 export default function ManyPlots({navigation}) {
     // const [inputs, setInputs] = useState([{key: '', value: ''}]);
     const [inputs, setInputs] = useState([
+        {key: 2, value: 'Zaśpicze 59/1'},
         {key: 0, value: 'Chwaszczewo 15'},
         {key: 1, value: 'Plebanowce 43'},
     ]);

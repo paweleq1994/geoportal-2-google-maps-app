@@ -8,6 +8,8 @@ import Checkbox from 'expo-checkbox';
 export default function ManyPlotsResults({route}) {
     let [responseGeo, setResponseGeo] = useState([]);
     const [urlsArr, setUrlsArr] = useState([]);
+    const [startAddress, setStartAddress] = useState('')
+    const [endAddress, setEndAddress] = useState('')
 
     const data = route.params.data.filter(e => e.key !== "" && e.value !== 0)
 
@@ -101,7 +103,9 @@ export default function ManyPlotsResults({route}) {
     }
 
     const generateRoute = () => {
-        console.log(urlsArr)
+        const coordinates = urlsArr.map(e => e.split("/").reverse()[0])
+
+        console.log(coordinates)
     }
 
     return (
