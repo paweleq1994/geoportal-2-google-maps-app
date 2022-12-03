@@ -18,9 +18,11 @@
       "**/*"
     ],
     "ios": {
+      "userInterfaceStyle": "light",
       "supportsTablet": true
     },
     "android": {
+      "userInterfaceStyle": "light",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,6 +36,12 @@
       "eas": {
         "projectId": "225076ec-b2c2-446a-938a-3e53b2bdb774"
       }
-    }
+    },
+    "plugins": [
+      [
+        "./plugins/withDisableForcedDarkModeAndroid.js",
+        {}
+      ]
+    ]
   }
 }
